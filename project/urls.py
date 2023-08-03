@@ -18,10 +18,11 @@ from django.urls import include, path
 from rest_framework_simplejwt import views as jwt_views
 from .views import MyTokenObtainPairView
 from django.views.generic.base import TemplateView
+from accounts.views import CustomUserCreate
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/things/", include("cookie_stands.urls")),
+    path("api/v1/site/", include("cookie_stands.urls")),
     path("api-auth/", include("rest_framework.urls")),
     path(
         "api/token/",
@@ -38,4 +39,6 @@ urlpatterns = [
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
+
+    path("api/register", CustomUserCreate.as_view(), name="create_user")
 ]
